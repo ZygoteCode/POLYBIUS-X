@@ -10,6 +10,8 @@ public partial class PolybiusGame : Form
     private WaveOutEvent _outputDevice2;
     private AudioFileReader _audioFile2;
 
+    private bool _isStopped;
+
     private string[] _subliminalMessages = new string[]
     {
         "KILL YOURSELF",
@@ -37,7 +39,8 @@ public partial class PolybiusGame : Form
     {
         InitializeComponent();
         PlayGameIntro();
-        PsychedelicEffect2.Start(this);
+        PsychedelicEffect7.Start(this);
+        timer4.Start();
     }
 
     public void ShowSubliminalMessage(string subliminalMessage)
@@ -55,7 +58,7 @@ public partial class PolybiusGame : Form
 
     protected override void OnPaint(PaintEventArgs e)
     {
-        PsychedelicEffect2.ProcessEffect(e);
+        PsychedelicEffect7.ProcessEffect(e);
     }
 
     private void PlayGameIntro()
@@ -72,12 +75,7 @@ public partial class PolybiusGame : Form
 
     private void _outputDevice1_PlaybackStopped(object sender, StoppedEventArgs e)
     {
-        PlayGameMusic();
-        
-        if (Globals.HIGHER_FUNCTIONS["Subliminal Messages"])
-        {
-            timer3.Start();
-        }
+        _isStopped = true;
     }
 
     private void StopGameIntro()
@@ -142,6 +140,21 @@ public partial class PolybiusGame : Form
         if (_subliminalMessageIndex >= _subliminalMessages.Length)
         {
             _subliminalMessageIndex = 0;
+        }
+    }
+
+    private void timer4_Tick(object sender, System.EventArgs e)
+    {
+        if (_isStopped)
+        {
+            _isStopped = false;
+            timer4.Stop();
+            PlayGameMusic();
+
+            if (Globals.HIGHER_FUNCTIONS["Subliminal Messages"])
+            {
+                timer3.Start();
+            }
         }
     }
 }

@@ -87,6 +87,7 @@ public partial class PolybiusIntro : Form
 
     private void timer3_Tick(object sender, EventArgs e)
     {
+        timer3.Stop();
         this.HideForm();
         PolybiusGame polybiusGame = new PolybiusGame();
         polybiusGame.Show();

@@ -8,6 +8,6 @@ internal static class Program
     {
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
-        Application.Run(new PolybiusIntro());
+        Application.Run(new PolybiusGame());
     }
 }
