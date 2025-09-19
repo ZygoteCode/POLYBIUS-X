@@ -8,6 +8,7 @@ public partial class GameLoading : Form
     public GameLoading()
     {
         InitializeComponent();
+        Cursor = new Cursor("assets\\polybius_cursor.cur");
         timer1.Start();
     }
 

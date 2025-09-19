@@ -6,6 +6,7 @@ public partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
+        Cursor = new Cursor("assets\\polybius_cursor.cur");
         timer1.Start();    
     }
 

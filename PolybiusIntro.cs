@@ -17,6 +17,7 @@ public partial class PolybiusIntro : Form
     public PolybiusIntro()
     {
         InitializeComponent();
+        Cursor = new Cursor("assets\\polybius_cursor.cur");
 
         _originalImage = pictureBox1.BackgroundImage;
         _differentImage1 = InvertImage(_originalImage);

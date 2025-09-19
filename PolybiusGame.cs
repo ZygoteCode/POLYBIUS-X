@@ -1,4 +1,6 @@
 ﻿using NAudio.Wave;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -9,6 +11,15 @@ public partial class PolybiusGame : Form
 
     private WaveOutEvent _outputDevice2;
     private AudioFileReader _audioFile2;
+
+    private WaveOutEvent _outputDevice3;
+    private AudioFileReader _audioFile3;
+
+    private WaveOutEvent _outputDevice4;
+    private AudioFileReader _audioFile4;
+
+    private WaveOutEvent _outputDevice5;
+    private AudioFileReader _audioFile5;
 
     private bool _isStopped;
 
@@ -38,9 +49,75 @@ public partial class PolybiusGame : Form
     public PolybiusGame()
     {
         InitializeComponent();
+        Cursor = new Cursor("assets\\polybius_cursor.cur");
         PlayGameIntro();
-        PsychedelicEffect7.Start(this);
+        PsychedelicEffect2.Start(this);
         timer4.Start();
+
+        if (Globals.IsHigherFunctionEnabled("Insomnia"))
+        {
+            PlayInsomniaSound();
+        }
+
+        if (Globals.IsHigherFunctionEnabled("Anxiety"))
+        {
+            PlayAnxietySound();
+        }
+
+        if (Globals.IsHigherFunctionEnabled("Night Terrors"))
+        {
+            PlayNightTerrorsSound();
+        }
+
+        if (Globals.IsHigherFunctionEnabled("Sleep Paralysis"))
+        {
+
+        }
+    }
+
+    public void PlayNightTerrorsSound()
+    {
+        _audioFile5 = new AudioFileReader("assets\\spooky_whispering_spirit_sounds.mp3");
+
+        _outputDevice5 = new WaveOutEvent();
+        _outputDevice5.PlaybackStopped += _outputDevice5_PlaybackStopped;
+        _outputDevice5.Init(_audioFile5);
+        _outputDevice5.Play();
+    }
+
+    private void _outputDevice5_PlaybackStopped(object sender, StoppedEventArgs e)
+    {
+        PlayNightTerrorsSound();
+    }
+
+    public void PlayInsomniaSound()
+    {
+        _audioFile3 = new AudioFileReader("assets\\clock_ticking.mp3");
+
+        _outputDevice3 = new WaveOutEvent();
+        _outputDevice3.PlaybackStopped += _outputDevice3_PlaybackStopped;
+        _outputDevice3.Init(_audioFile3);
+        _outputDevice3.Play();
+    }
+
+    public void PlayAnxietySound()
+    {
+        _audioFile4 = new AudioFileReader("assets\\shepard_tone.mp3");
+
+        _outputDevice4 = new WaveOutEvent();
+        _outputDevice4.PlaybackStopped += _outputDevice4_PlaybackStopped;
+        _outputDevice4.Init(_audioFile4);
+        _outputDevice4.Play();
+    }
+
+    private void _outputDevice4_PlaybackStopped(object sender, StoppedEventArgs e)
+    {
+        PlayAnxietySound();
+    }
+
+    private void _outputDevice3_PlaybackStopped(object sender, StoppedEventArgs e)
+    {
+        PlayInsomniaSound();
     }
 
     public void ShowSubliminalMessage(string subliminalMessage)
@@ -58,7 +135,7 @@ public partial class PolybiusGame : Form
 
     protected override void OnPaint(PaintEventArgs e)
     {
-        PsychedelicEffect7.ProcessEffect(e);
+        PsychedelicEffect2.ProcessEffect(e);
     }
 
     private void PlayGameIntro()
@@ -151,7 +228,7 @@ public partial class PolybiusGame : Form
             timer4.Stop();
             PlayGameMusic();
 
-            if (Globals.HIGHER_FUNCTIONS["Subliminal Messages"])
+            if (Globals.IsHigherFunctionEnabled("Subliminal Messages"))
             {
                 timer3.Start();
             }

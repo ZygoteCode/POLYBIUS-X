@@ -8,6 +8,7 @@ public partial class HigherFunctions : Form
     public HigherFunctions()
     {
         InitializeComponent();
+        Cursor = new Cursor("assets\\polybius_cursor.cur");
         int y = 132;
 
         foreach (KeyValuePair<string, bool> higherFunction in Globals.HIGHER_FUNCTIONS)
