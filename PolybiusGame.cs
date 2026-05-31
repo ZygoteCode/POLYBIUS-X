@@ -49,30 +49,6 @@ public partial class PolybiusGame : Form
     public PolybiusGame()
     {
         InitializeComponent();
-        Cursor = new Cursor("assets\\polybius_cursor.cur");
-        PlayGameIntro();
-        PsychedelicEffect2.Start(this);
-        timer4.Start();
-
-        if (Globals.IsHigherFunctionEnabled("Insomnia"))
-        {
-            PlayInsomniaSound();
-        }
-
-        if (Globals.IsHigherFunctionEnabled("Anxiety"))
-        {
-            PlayAnxietySound();
-        }
-
-        if (Globals.IsHigherFunctionEnabled("Night Terrors"))
-        {
-            PlayNightTerrorsSound();
-        }
-
-        if (Globals.IsHigherFunctionEnabled("Sleep Paralysis"))
-        {
-
-        }
     }
 
     public void PlayNightTerrorsSound()
@@ -131,11 +107,6 @@ public partial class PolybiusGame : Form
     {
         timer2.Stop();
         label1.Visible = false;
-    }
-
-    protected override void OnPaint(PaintEventArgs e)
-    {
-        PsychedelicEffect2.ProcessEffect(e);
     }
 
     private void PlayGameIntro()
@@ -232,6 +203,39 @@ public partial class PolybiusGame : Form
             {
                 timer3.Start();
             }
+        }
+    }
+
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        PsychedelicEffect7.ProcessEffect(e);
+    }
+
+    private void PolybiusGame_Load(object sender, EventArgs e)
+    {
+        Cursor = new Cursor("assets\\polybius_cursor.cur");
+        PlayGameIntro();
+        PsychedelicEffect7.Start(this);
+        timer4.Start();
+
+        if (Globals.IsHigherFunctionEnabled("Insomnia"))
+        {
+            PlayInsomniaSound();
+        }
+
+        if (Globals.IsHigherFunctionEnabled("Anxiety"))
+        {
+            PlayAnxietySound();
+        }
+
+        if (Globals.IsHigherFunctionEnabled("Night Terrors"))
+        {
+            PlayNightTerrorsSound();
+        }
+
+        if (Globals.IsHigherFunctionEnabled("Sleep Paralysis"))
+        {
+
         }
     }
 }

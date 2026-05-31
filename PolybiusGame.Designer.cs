@@ -71,6 +71,7 @@
             this.Text = "POLYBIUS X";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PolybiusGame_FormClosing);
+            this.Load += new System.EventHandler(this.PolybiusGame_Load);
             this.ResumeLayout(false);
 
     }
